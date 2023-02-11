@@ -1,6 +1,7 @@
+require('module-alias/register');
 import 'reflect-metadata';
 import express from 'express';
-import {configApollo} from './config/apollo'
+import {configApollo} from '@/config/apollo'
 
 
 const main = async() => {
