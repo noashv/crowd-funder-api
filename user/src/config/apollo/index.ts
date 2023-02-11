@@ -4,7 +4,7 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import cors from 'cors';
 import { json } from 'body-parser';
-import { createSchema } from '@src/modules';
+import { createSchema } from '../../modules';
 
 export const configApollo = async (app) => {
 
@@ -12,6 +12,5 @@ export const configApollo = async (app) => {
     const apolloServer = new ApolloServer({ schema });
     await apolloServer.start();
 
-    // apolloServer.applyMiddleware({app});
-    app.use('/', cors<cors.CorsRequest>(), json(), expressMiddleware(apolloServer));
+    app.use('/graphql', cors<cors.CorsRequest>(), json(), expressMiddleware(apolloServer));
 }
