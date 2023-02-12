@@ -10,6 +10,8 @@ services:
       POSTGRES_PASSWORD: 1234
     ports:
       - "5432:5432"
+    networks:
+      - postgres
   
   pgadmin:
     container_name: user-pg-admin
