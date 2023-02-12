@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
-    "start": "ts-node src/index.ts | bunyan -o short"
+    "start": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts | bunyan -o short"
   },
   "keywords": [],
   "author": "",
