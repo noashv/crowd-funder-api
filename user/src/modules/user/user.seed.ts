@@ -1,6 +1,5 @@
 import appDataSource from '@/config/db';
-import log from '@/config/logger';
-import User from './user.entity';
+import User from './user.type';
 
 const seedUser = async () => {
   const userRepository = appDataSource.getRepository(User);
@@ -11,9 +10,7 @@ const seedUser = async () => {
     email: 'gilag@gmail.com',
   });
 
-  await userRepository.save(defaultUser);
-
-  log.info('user seeded');
+  return userRepository.save(defaultUser);
 };
 
 export default seedUser;

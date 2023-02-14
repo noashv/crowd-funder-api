@@ -9,7 +9,7 @@
         "airbnb"
     ],
     "overrides": [{
-        "files": [ "*.resolver.ts", "*.entity.ts" ],
+        "files": [ "*.resolver.ts", "*.type.ts", "*.args.ts"  ],
         "rules": {
           "no-unused-vars": "off",
           "arrow-parens": "off",

@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
 import log from '@/config/logger';
-import User from '@/modules/user/user.entity';
+import User from '@/modules/user/user.type';
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ const appDataSource = new DataSource({
   database: 'postgres',
   entities: [User],
   synchronize: true,
-  logging: false,
+  logging: true,
 });
 
 export const connectToDB = async () => {
