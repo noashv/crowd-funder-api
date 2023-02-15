@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
 import log from '@/config/logger';
-import User from '@/modules/user/user.type';
+import User from '@/modules/user/user.entity';
 
 dotenv.config();
 

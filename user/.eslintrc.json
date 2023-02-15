@@ -9,12 +9,13 @@
         "airbnb"
     ],
     "overrides": [{
-        "files": [ "*.resolver.ts", "*.type.ts", "*.args.ts"  ],
+        "files": [ "*.resolver.ts", "*.entity.ts", "*.args.ts"  ],
         "rules": {
           "no-unused-vars": "off",
           "arrow-parens": "off",
           "@typescript-eslint/no-unused-vars": "off",
-          "class-methods-use-this": "off"
+          "class-methods-use-this": "off",
+          "max-classes-per-file": "off"
         }
       }],
     "parser": "@typescript-eslint/parser",

@@ -1,5 +1,5 @@
 import appDataSource from '@/config/db';
-import User from './user.type';
+import User from './user.entity';
 
 const seedUser = async () => {
   const userRepository = appDataSource.getRepository(User);

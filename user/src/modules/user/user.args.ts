@@ -1,23 +1,35 @@
 import { Length, IsEmail, MinLength } from 'class-validator';
-import { ArgsType, Field, ID } from 'type-graphql';
-import { IUser } from './user.type';
+import {
+  ArgsType, Field, ID, InputType,
+} from 'type-graphql';
+import { IUser } from './user.entity';
+
+@InputType()
+export class UserInput implements Partial<IUser> {
+  @Field(type => String)
+  @Length(1, 25)
+    name: string;
+
+  @Field(type => String)
+  @IsEmail({}, { message: 'input must be a valid email' })
+    email: string;
+
+  @Field(type => String)
+  @MinLength(4)
+    password: string;
+}
 
 @ArgsType()
-class UserArgs implements Partial<IUser> {
+export class UserArgs implements Partial<IUser> {
   @Field(type => ID, { nullable: true })
     id?: string;
 
   @Field(type => String, { nullable: true })
-  @Length(1, 25)
     name?: string;
 
   @Field(type => String, { nullable: true })
-  @IsEmail()
     email?: string;
 
   @Field(type => String, { nullable: true })
-  @MinLength(4)
     password?: string;
 }
-
-export default UserArgs;

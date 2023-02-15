@@ -15,7 +15,9 @@ const main = async () => {
   const app = express();
   configApollo(app);
   await connectToDB();
-  await seedModules();
+  if (process.env.SEED_DB) {
+    await seedModules();
+  }
 
   app.listen(4000, () => { log.info('server started on http://localhost:4000/graphql'); });
 };

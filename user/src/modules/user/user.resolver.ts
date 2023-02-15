@@ -1,9 +1,9 @@
 import {
-  Resolver, Query, Args,
+  Resolver, Query, Args, Arg, Mutation,
 } from 'type-graphql';
-import User from './user.type';
+import User from './user.entity';
 import UserRepository from './user.repository';
-import UserArgs from './user.args';
+import { UserArgs, UserInput } from './user.args';
 
 @Resolver(of => User)
 class UserResolver {
@@ -13,6 +13,13 @@ class UserResolver {
   async user(@Args() queryParams: UserArgs) {
     return this.userRepository.findOneBy(queryParams);
   }
+
+@Mutation(returns => Boolean)
+async addUser(@Arg('data') newUserData: UserInput) {
+  const userData = await this.userRepository.save(newUserData);
+  console.log(userData);
+  return true;
+}
 }
 
 export default UserResolver;
