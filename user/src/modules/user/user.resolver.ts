@@ -14,11 +14,9 @@ class UserResolver {
     return this.userRepository.findOneBy(queryParams);
   }
 
-@Mutation(returns => Boolean)
+@Mutation(returns => User)
 async addUser(@Arg('data') newUserData: UserInput) {
-  const userData = await this.userRepository.save(newUserData);
-  console.log(userData);
-  return true;
+  return this.userRepository.save(newUserData);
 }
 }
 
