@@ -10,18 +10,17 @@ import { UserArgs, UserInput } from './user.args';
 @Resolver(of => User)
 class UserResolver {
   constructor(
-    // constructor injection of a service
     private readonly userRepository: UserRepository,
   ) {}
 
-@Query(returns => User)
+@Query(returns => User, { nullable: true })
   async user(@Args() queryParams: UserArgs) {
     return this.userRepository.findOneBy(queryParams);
   }
 
-@Mutation(returns => User)
+@Mutation(returns => User, { nullable: true })
 async addUser(@Arg('data') newUserData: UserInput) {
-  return this.userRepository.save(newUserData);
+  return this.userRepository.add(newUserData);
 }
 }
 

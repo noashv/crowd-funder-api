@@ -10,7 +10,7 @@ import { ValidationError } from './validation-error';
  * @see  https://github.com/MichalLytek/type-graphql/issues/1397#issuecomment-1351432122
  *
  * (a beta version of `type-graphql` is used in the project, so this function
- * might not bee needed with a stable release)
+ * might not be needed with a stable release)
  */
 function formatError(
   formattedError: GraphQLFormattedError,

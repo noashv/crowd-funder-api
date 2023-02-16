@@ -25,11 +25,14 @@ export class UserArgs implements Partial<IUser> {
     id?: string;
 
   @Field(type => String, { nullable: true })
+  @Length(1, 25)
     name?: string;
 
   @Field(type => String, { nullable: true })
+  @IsEmail({}, { message: 'input must be a valid email' })
     email?: string;
 
+  @MinLength(4)
   @Field(type => String, { nullable: true })
     password?: string;
 }

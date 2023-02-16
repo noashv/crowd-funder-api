@@ -1,4 +1,6 @@
 import * as dotenv from 'dotenv';
+
+import { Container } from 'typedi';
 import { DataSource } from 'typeorm';
 import log from '@/config/logger';
 import User from '@/modules/user/user.entity';
@@ -20,6 +22,7 @@ const appDataSource = new DataSource({
 export const connectToDB = async () => {
   try {
     await appDataSource.initialize();
+    Container.set(DataSource, appDataSource);
 
     log.info('connected to db');
   } catch (error) {
