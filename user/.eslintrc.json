@@ -13,6 +13,9 @@
         "rules": {
           "no-unused-vars": "off",
           "arrow-parens": "off",
+          "no-useless-constructor": "off",
+          "no-empty-function": "off",
+          "no-undef": "off",
           "@typescript-eslint/no-unused-vars": "off",
           "class-methods-use-this": "off",
           "max-classes-per-file": "off"

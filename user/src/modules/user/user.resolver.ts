@@ -1,13 +1,18 @@
 import {
   Resolver, Query, Args, Arg, Mutation,
 } from 'type-graphql';
+import { Service } from 'typedi';
 import User from './user.entity';
 import UserRepository from './user.repository';
 import { UserArgs, UserInput } from './user.args';
 
+@Service()
 @Resolver(of => User)
 class UserResolver {
-  private userRepository = new UserRepository();
+  constructor(
+    // constructor injection of a service
+    private readonly userRepository: UserRepository,
+  ) {}
 
 @Query(returns => User)
   async user(@Args() queryParams: UserArgs) {
