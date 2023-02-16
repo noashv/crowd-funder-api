@@ -20,7 +20,14 @@
           "class-methods-use-this": "off",
           "max-classes-per-file": "off"
         }
-      }],
+      }, 
+      {
+        "files": [ "*.test.ts" ],
+        "rules": {
+          "no-undef": "off"
+        }
+      }
+    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
