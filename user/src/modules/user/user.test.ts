@@ -41,7 +41,7 @@ describe('User', () => {
       variables: { name: 'gila' },
     });
 
-    console.log(response.body);
+    console.log('res', response.body);
     // assert(body.kind === 'single');
     // expect(response.body).toBeUndefined();
     // expect(response.body.singleResult.data?.hello).toBe('Hello world!');
