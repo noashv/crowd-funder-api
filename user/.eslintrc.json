@@ -9,14 +9,25 @@
         "airbnb"
     ],
     "overrides": [{
-        "files": [ "*.resolver.ts", "*.entity.ts" ],
+        "files": [ "*.resolver.ts", "*.entity.ts", "*.args.ts"  ],
         "rules": {
           "no-unused-vars": "off",
           "arrow-parens": "off",
+          "no-useless-constructor": "off",
+          "no-empty-function": "off",
+          "no-undef": "off",
           "@typescript-eslint/no-unused-vars": "off",
-          "class-methods-use-this": "off"
+          "class-methods-use-this": "off",
+          "max-classes-per-file": "off"
         }
-      }],
+      }, 
+      {
+        "files": [ "*.test.ts" ],
+        "rules": {
+          "no-undef": "off"
+        }
+      }
+    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
