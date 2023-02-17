@@ -12,6 +12,18 @@ services:
       - "5432:5432"
     networks:
       - postgres
+
+  test-db:
+    container_name: test-db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5433:5432"
+    networks:
+      - postgres
   
   pgadmin:
     container_name: user-pg-admin

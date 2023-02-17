@@ -10,21 +10,20 @@ dotenv.config();
 const mockDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
-  port: Number(process.env.DB_PORT),
-  username: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: 'test-db',
+  port: Number(process.env.TEST_DB_PORT),
+  username: process.env.TEST_POSTGRES_USER,
+  password: process.env.TEST_POSTGRES_PASSWORD,
+  database: 'postgres',
   entities: [User],
   synchronize: true,
-  logging: true,
+  dropSchema: true,
 });
 
-export const connectToMockDB = async () => {
+export const initializeMockDB = async () => {
   try {
+    // will drop the schema on every call:
     await mockDataSource.initialize();
     Container.set(DataSource, mockDataSource);
-
-    log.info('connected to db');
   } catch (error) {
     log.error('an error occured while connecting to db', error);
   }
