@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "tsc",
     "start": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts | bunyan -o short",
-    "test": "jest"
+    "test": "jest",
+    "seed": "ts-node src/modules/modules.seed.ts | bunyan -o short"
   },
   "keywords": [],
   "author": "",
