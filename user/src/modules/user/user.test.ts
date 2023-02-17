@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Repository } from 'typeorm';
 import { ApolloServer } from '@apollo/server';
-import mockDataSource, { initializeMockDB } from '@/test/mock-db';
+import mockDataSource from '@/test/mock-dbsata-source';
+import initializeDataSource from '@/config/db/initialize-data-source';
 import createSchema from '../modules.schema';
 import User from './user.entity';
 
@@ -9,7 +10,7 @@ let testServer: ApolloServer;
 let userRepository: Repository<User>;
 
 beforeAll(async () => {
-  await initializeMockDB();
+  await initializeDataSource(mockDataSource);
   userRepository = mockDataSource.getRepository(User);
   const schema = await createSchema();
   testServer = new ApolloServer({
