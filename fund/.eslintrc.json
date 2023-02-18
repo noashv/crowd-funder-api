@@ -1,0 +1,44 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "airbnb"
+    ],
+    "overrides": [{
+        "files": [ "*.resolver.ts", "*.entity.ts", "*.args.ts"  ],
+        "rules": {
+          "no-unused-vars": "off",
+          "arrow-parens": "off",
+          "no-useless-constructor": "off",
+          "no-empty-function": "off",
+          "no-undef": "off",
+          "@typescript-eslint/no-unused-vars": "off",
+          "class-methods-use-this": "off",
+          "max-classes-per-file": "off"
+        }
+      }, 
+      {
+        "files": [ "*.test.ts" ],
+        "rules": {
+          "no-undef": "off"
+        }
+      }
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "import/first": "off"
+    }
+}
