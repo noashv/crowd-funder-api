@@ -2,10 +2,10 @@ import { Length, IsEmail, MinLength } from 'class-validator';
 import {
   ArgsType, Field, ID, InputType,
 } from 'type-graphql';
-import { IUser } from './user.entity';
+import User from './user.entity';
 
 @InputType()
-export class UserInput implements Partial<IUser> {
+export class UserInput implements Omit<User, 'id'> {
   @Field(type => String)
   @Length(1, 25)
     name: string;
@@ -20,7 +20,7 @@ export class UserInput implements Partial<IUser> {
 }
 
 @ArgsType()
-export class UserArgs implements Partial<IUser> {
+export class UserArgs implements Partial<User> {
   @Field(type => ID, { nullable: true })
     id?: string;
 
