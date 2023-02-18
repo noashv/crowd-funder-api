@@ -2,25 +2,25 @@ import {
   Resolver, Query, Args, Arg, Mutation,
 } from 'type-graphql';
 import { Service } from 'typedi';
-import User from './fund.entity';
-import UserRepository from './fund.repository';
+import Fund from './fund.entity';
+import FundRepository from './fund.repository';
 import { FundArgs, FundInput } from './fund.args';
 
 @Service()
-@Resolver(of => User)
+@Resolver(of => Fund)
 class FundResolver {
   constructor(
-    private readonly userRepository: UserRepository,
+    private readonly fundRepository: FundRepository,
   ) {}
 
-@Query(returns => User, { nullable: true })
+@Query(returns => Fund, { nullable: true })
   async user(@Args() queryParams: FundArgs) {
-    return this.userRepository.findOneBy(queryParams);
+    return this.fundRepository.findOneBy(queryParams);
   }
 
-@Mutation(returns => User, { nullable: true })
-async addUser(@Arg('data') newUserData: FundInput) {
-  return this.userRepository.add(newUserData);
+@Mutation(returns => Fund, { nullable: true })
+async addUser(@Arg('data') newFundData: FundInput) {
+  return this.fundRepository.add(newFundData);
 }
 }
 
