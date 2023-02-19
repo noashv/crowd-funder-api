@@ -3,7 +3,7 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import cors from 'cors';
 import { json } from 'body-parser';
-import { createSchema } from '@/modules';
+import createSchema from '@/modules/modules.schema';
 import formatError from './format-error';
 
 const configApollo = async (app) => {
