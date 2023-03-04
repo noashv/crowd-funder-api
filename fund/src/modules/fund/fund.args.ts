@@ -1,5 +1,5 @@
 import {
-  Length, IsEmail, MinLength, IsDate,
+  Length, IsEmail, MinLength, IsDate, Min,
 } from 'class-validator';
 import {
   ArgsType, Field, ID, InputType,
@@ -9,15 +9,15 @@ import Fund, { FundStatus } from './fund.entity';
 @InputType()
 export class FundInput implements Omit<Fund, 'id'> {
   @Field(type => String)
-  @Length(1, 25)
+  @Length(1, 255)
     name: string;
 
   @Field(type => String)
-  @IsEmail()
+  @Length(1, 255)
     description: string;
 
   @Field(type => Number)
-  @MinLength(4)
+  @Min(1)
     endGoal: number;
 
     @Field(type => Date)
@@ -37,15 +37,15 @@ export class FundArgs implements Partial<Fund> {
     id?: string;
 
     @Field(type => String, { nullable: true })
-    @Length(1, 25)
+    @Length(1, 255)
       name: string;
 
     @Field(type => String, { nullable: true })
-    @IsEmail()
+    @Length(1, 255)
       description: string;
 
     @Field(type => Number, { nullable: true })
-    @MinLength(4)
+    @Min(1)
       endGoal: number;
 
     @Field(type => Date, { nullable: true })

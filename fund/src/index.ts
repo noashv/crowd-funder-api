@@ -7,7 +7,6 @@ import express from 'express';
 import configApollo from '@/config/apollo';
 import { connectToDB } from '@/config/db';
 import log from '@/config/logger';
-import { seedModules } from '@/modules';
 
 dotenv.config();
 
@@ -15,11 +14,8 @@ const main = async () => {
   const app = express();
   configApollo(app);
   await connectToDB();
-  if (process.env.SEED_DB) {
-    await seedModules();
-  }
 
-  app.listen(4000, () => { log.info('server started on http://localhost:4000/graphql'); });
+  app.listen(process.env.PORT, () => { log.info(`server started on http://localhost:${process.env.PORT}/graphql`); });
 };
 
 main();

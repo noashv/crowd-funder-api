@@ -19,15 +19,15 @@ beforeAll(async () => {
 });
 
 afterEach(async () => {
-  fundRepository.clear();
+  // fundRepository.clear();
 });
 
 afterAll(async () => mockDataSource.destroy());
 
-describe('User', () => {
-  it('fetches a user', async () => {
-    const user = fundRepository.create({
-      name: 'coffe cups in memory of gila',
+describe('Fund', () => {
+  it('fetches a fund', async () => {
+    const fund = fundRepository.create({
+      name: 'coffe cups in memory of Gila',
       description: 'help us make coffe cups in memory of Gila Goldstien',
       endGoal: 100,
       deadline: new Date(),
@@ -35,20 +35,21 @@ describe('User', () => {
       userId: '1',
     });
 
-    await fundRepository.save(user);
+    await fundRepository.save(fund);
 
     const query = `
-    query User($name: String) {
-        user(name: $name) {
-          email
+    query Fund($name: String) {
+        fund(name: $name) {
           name
+          description
+          endGoal
         }
       }      
     `;
 
     const response = await testServer.executeOperation({
       query,
-      variables: { name: 'gila' },
+      variables: { name: 'coffe cups in memory of Gila' },
     });
 
     /* there is probably a problem in my local env, single result should be
@@ -58,36 +59,50 @@ describe('User', () => {
 
     expect(response.body.kind).toBe('single');
     expect(singleResult.errors).toBeUndefined();
-    expect(singleResult.data.user).toEqual({ email: user.email, name: user.name });
+    expect(singleResult.data.fund).toEqual(
+      { name: fund.name, description: fund.description, endGoal: fund.endGoal },
+    );
   });
 
-  it('creates a user', async () => {
-    const newUser = { name: 'nancy', email: 'nancyshc@gmail.com', password: 'nancyy' };
+  it('creates a fund', async () => {
+    const newFund = {
+      name: 'growing my 80s garfield plush collection',
+      description: 'the title says it all',
+      endGoal: 4000,
+      deadline: '2023-02-20 15:53:09.588',
+      status: FundStatus.Unset,
+      userId: '1',
+    };
 
     const mutation = `
-    mutation AddUser($data: UserInput!) {
-      addUser(data: $data) {
-        email
+    mutation AddFund($data: FundInput!) {
+      addFund(data: $data) {
         name
-        password
+        description
+        endGoal
+        deadline
+        status
+        userId
       }
     }
     `;
 
     const response = await testServer.executeOperation({
       query: mutation,
-      variables: { data: newUser },
+      variables: { data: newFund },
     });
       // @ts-ignore
     const { singleResult } = response.body;
 
-    const userSavedInDb = await userRepository.findOneBy(newUser);
+    const funds = await fundRepository.find();
+    console.log('ADSADSD', funds);
+    const fundSavedInDb = await fundRepository.findOneBy({ endGoal: newFund.endGoal });
 
-    expect(userSavedInDb).toMatchObject(newUser);
-    expect(userSavedInDb).toHaveProperty('id');
+    expect(fundSavedInDb).toMatchObject(newFund);
+    expect(fundSavedInDb).toHaveProperty('id');
 
     expect(response.body.kind).toBe('single');
     expect(singleResult.errors).toBeUndefined();
-    expect(singleResult.data.addUser).toEqual(newUser);
+    expect(singleResult.data.addUser).toEqual(fundSavedInDb);
   });
 });

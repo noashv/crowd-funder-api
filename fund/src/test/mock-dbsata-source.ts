@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 
 import { DataSource } from 'typeorm';
-import User from '@/modules/fund/fund.entity';
+import Fund from '@/modules/fund/fund.entity';
 
 dotenv.config();
 
@@ -12,9 +12,10 @@ const mockDataSource = new DataSource({
   username: process.env.TEST_POSTGRES_USER,
   password: process.env.TEST_POSTGRES_PASSWORD,
   database: 'postgres',
-  entities: [User],
+  entities: [Fund],
   synchronize: true,
   dropSchema: true,
+  logging: true,
 });
 
 export default mockDataSource;

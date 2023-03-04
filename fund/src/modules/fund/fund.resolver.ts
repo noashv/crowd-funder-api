@@ -14,12 +14,12 @@ class FundResolver {
   ) {}
 
 @Query(returns => Fund, { nullable: true })
-  async user(@Args() queryParams: FundArgs) {
+  async fund(@Args() queryParams: FundArgs) {
     return this.fundRepository.findOneBy(queryParams);
   }
 
 @Mutation(returns => Fund, { nullable: true })
-async addUser(@Arg('data') newFundData: FundInput) {
+async addFund(@Arg('data') newFundData: FundInput) {
   return this.fundRepository.add(newFundData);
 }
 }
